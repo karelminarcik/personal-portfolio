@@ -15,6 +15,14 @@
 html {
     font-size: 62.5%;
     overflow-x: hidden;
+
+    @media (max-width: 1200px) {
+        font-size: 55%;
+    }
+
+    @media (max-width: 520px) {
+        font-size: 50%;
+    }
 }
 
 body {
@@ -35,14 +43,36 @@ header {
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    transition: .3s;
+
+    @media (max-width: 990px) {
+        padding: 2rem 4%;
+    }
+
+    @media (max-width: 768px) {
+        background-color: $bg-color;
+    }
 
     .logo {
+        position: relative;
         font-size: 2.5rem;
         color: $text-color;
         font-weight: 600;
+
+        .animate {
+            animation: showRight 1s ease forwards;
+            animation-delay: calc(.3s * var(--i));
+        }
     }
 
     .navbar {
+        position: relative;
+
+        .animate {
+            animation: showRight 1s ease forwards;
+            animation-delay: calc(.3s * var(--i));
+        }
+
         a {
             font-size: 1.7rem;
             color: $text-color;
@@ -54,17 +84,81 @@ header {
             &.active {
                 color: $main-color;
             }
+
+            @media (max-width: 768px) {
+                display: block;
+                font-size: 2rem;
+                margin: 3rem 0;
+                transform: translateX(-20rem);
+                transition: .25s ease;
+                transition-delay: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            position: absolute;
+            top: 100%;
+            left: -100%;
+            width: 100%;
+            padding: 1rem 4%;
+            background-color: $main-color;
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+            z-index: 1;
+            transition: .25s ease;
+            transition-delay: .25s;
+
+            &.active {
+                left: 0;
+                transition-delay: 0;
+
+                .active-nav {
+                    transition-delay: .25s;
+                    left: 0;
+                } 
+                
+                a {
+                    transform: translateX(0);
+                    transition-delay: .5s;
+                }
+            }
+
+            .active-nav {
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background-color: $bg-color;
+                border-top: .1rem solid rgba(0, 0, 0, .2);
+                z-index: -1;
+                transition: .25s ease;
+                transition-delay: .25s;
+            }
         }
     }
 
     #menu-icon{
+        position: relative;
         font-size: 3.6rem;
         color: $text-color;
         cursor: pointer;
         display: none;
+
+        .animate {
+            animation: showRight 1s ease forwards;
+            animation-delay: calc(.3s * var(--i));
+        }
+
+        @media (max-width: 768px) {
+            display: block;
+        }
+
+
     }
 
-    
+    &.sticky {
+        background-color: $bg-color;
+    }   
 }
 
 // ----------------------- Main Section -----------------
@@ -72,6 +166,16 @@ header {
 section {
     min-height: 100vh;
     padding: 10rem 9% 2rem;
+
+    &:nth-child(even) {
+        .animate.scroll {
+            background-color: $sec-bg-color;
+        }
+    }
+
+    @media (max-width:990px) {
+        padding: 10rem 4% 2rem;
+    }
 }
 
 .home {
@@ -82,16 +186,71 @@ section {
     background-size: cover;
     background-position: center;
 
+    @media (max-width: 990px) {
+        padding: 0 4%;
+    }
+
+    @media (max-width: 371px) {
+        justify-content: center;
+    }
+
+    &.home-img {
+        width: 50%;
+    }
+
+    &.show-animate {
+        .animate {
+            animation: showRight 1s ease forwards;
+            animation-delay: calc(.3s * var(--i));
+        }
+
+        .home-content {
+            .text-animate {
+                h3 {
+                    animation: homeBGText 6s linear infinite;
+                    animation-delay: 2s;
+
+                    &::before {
+                        animation: homeCursorText 6s linear infinite;
+                        animation-delay: 2s;
+                    }
+                }
+            }
+        }
+    }
+
     .home-content{
         max-width: 60rem;
+        z-index: 99;
+
+        @media (max-width: 371px) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
         h1 {
+            position: relative;
+            display: inline-block;
             font-size: 5.6rem;
             font-weight: 700;
             line-height: 1.3;
 
             span {
                 color: $text-color;
+            }
+
+            @media (max-width:520px) {
+                display: flex;
+                flex-direction: column;
+            }
+
+            @media (max-width:462px) {
+                font-size: 5.2rem;
+            }
+
+            @media (max-width: 371px) {
+                font-size: 5.2rem;
             }
         }
 
@@ -104,10 +263,28 @@ section {
                 font-weight: 700;
                 color: transparent;
                 -webkit-text-stroke: .7px $main-color;
+                background-image: linear-gradient($main-color, $main-color);
+                background-repeat: no-repeat;
+                -webkit-background-clip: text;
+                background-position: -33rem 0;
+                
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 0;
+                    height: 100%;
+                    border-right:  2px solid $main-color;
+                    z-index: -1;
+                    
+                }
             }
         }
 
         p{
+            position: relative;
             font-size: 1.6rem;
             margin: 2rem 0 4rem;
         }
@@ -127,6 +304,11 @@ section {
         width: 170px;
         display: flex;
         justify-content: space-between;
+
+        @media (max-width: 520px) {
+            width: 160px;
+        }
+
     
         a {
             position: relative;
@@ -143,6 +325,11 @@ section {
             z-index: 1;
             overflow: hidden;
             transition: .5s;
+
+            @media (max-width: 520px) {
+                width: 38px;
+                height: 38px;
+            }
     
             &:hover {
                 color: $bg-color;
@@ -181,6 +368,12 @@ section {
             background-color: $bg-color;
             opacity: .8;
         }
+
+        @media (max-width:990px) {
+            pointer-events: none;
+            background-color: $bg-color;
+            opacity: .6;
+        }
     }
 }
 
@@ -195,8 +388,16 @@ section {
     background-color: $sec-bg-color;
     padding-bottom: 6rem;
 
+    &.show-animate {
+        .animate.scroll {
+            transition-delay: calc(.3s *var(--i));
+            width: 0
+        }
+    }
+
     .heading{
         @include h2;
+        position: relative;
     }
 
     h2 span {
@@ -230,6 +431,7 @@ section {
             border-bottom: .2rem solid $sec-bg-color;
             border-left: .2rem solid $main-color;
             border-right: .2rem solid $main-color;
+            animation: aboutSpinner 8s linear infinite;
 
         }
     }
@@ -238,10 +440,13 @@ section {
         text-align: center;
 
         h3 {
+            position: relative;
+            display: inline-block;
             font-size: 2.6rem;
         }
 
         p {
+            position: relative;
             font-size: 1.6rem;
             margin: 2rem 0 3rem;
         }
@@ -275,7 +480,19 @@ section {
     min-height: auto;
     padding-bottom: 5rem;
 
+    &.show-animate {
+        .animate.scroll {
+            transition-delay: calc(.3s *var(--i));
+            width: 0
+        }
+    }
+
+    @media (max-width:462px) {
+        padding: 10rem 4% 5rem 5%;
+    }
+
     .heading{
+        position: relative;
         @include h2;
     }
 
@@ -289,15 +506,19 @@ section {
         gap: 5rem;
 
         .education-column {
+            position: relative;
             flex: 1 1 40rem;
 
             .title {
+                position: relative;
                 font-size: 2.5rem;
                 margin: 0 0 1.5rem 2rem;
             }
 
             .educatio-box {
+                position: relative;
                 border-left: .2rem solid $main-color;
+                
 
                 .education-content {
                     position: relative;
@@ -373,12 +594,23 @@ section {
     padding-bottom: 7rem;
     background-color: $sec-bg-color;
 
+    &.show-animate {
+        .animate.scroll {
+            transition-delay: calc(.3s *var(--i));
+            width: 0
+        }
+    }
+
     .heading{
         @include h2;
     }
 
-    h2 span {
-        color: $main-color;
+    h2 {
+        position: relative;
+        span {
+            color: $main-color;
+        }
+        
     }
 
     .skills-row {
@@ -390,6 +622,8 @@ section {
             flex: 1 1 40rem;
 
             .title {
+                position: relative;
+                display: inline-block;
                 font-size: 2.5rem;
                 margin: 0 0 1.5rem;
             }
@@ -530,10 +764,18 @@ section {
 
 .contact {
 
+    &.show-animate {
+        .animate.scroll {
+            transition-delay: calc(.3s *var(--i));
+            width: 0
+        }
+    }
+
     min-height: auto;
     padding-bottom: 7rem;
 
     .heading {
+        position: relative;
         @include h2;
 
         span {
@@ -556,6 +798,10 @@ section {
                 position: relative;
                 width: 49%;
                 margin: .8rem 0;
+
+                @media (max-width:462px) {
+                    width: 100%;
+                }
 
                 input {
                     width: 100%;
@@ -635,13 +881,41 @@ footer {
     padding: 2rem 9%;
     background-color: $sec-bg-color;
 
+    .animate.scroll {
+        background-color: $sec-bg-color;
+    }
+
+    &.show-animate {
+        .animate.scroll {
+            transition-delay: calc(.3s *var(--i));
+            width: 0
+        }
+    }
+
+    @media (max-width: 990px) {
+        padding: 2rem 4%;
+    }
+
+    @media (max-width: 462px) {
+        flex-direction: column-reverse;
+    }
+
     .footer-text {
+        position: relative;
         p {
             font-size: 1.6rem;
+
+            @media (max-width: 462px) {
+                margin-top: 2rem;
+                text-align: center;
+            }
         }
     }
 
     .footer-iconTop {
+
+        position: relative;
+
         a {
             position: relative;
             display: inline-flex;
@@ -680,5 +954,61 @@ footer {
                 
             }
         }
+    }
+}
+
+// animations
+.animate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $bg-color;
+    z-index: 98;
+
+    &.scroll {
+        transition: 1s ease;
+        transition-delay: calc(.3s / var(--i));
+        animation: none;
+    }
+}
+
+
+// Breakpoints
+@keyframes homeBGText {
+    0%, 10%, 100% {
+        background-position: -33rem 0;
+    }
+
+    65%, 85% {
+        background-position: 0px 0px;
+    }
+}
+
+@keyframes homeCursorText {
+    0%, 10%, 100% {
+        width: 0;
+    }
+
+    65%, 78%, 85% {
+        width: 100%;
+        opacity: 1;
+    }
+
+    75%, 81% {
+        opacity: 0;
+    }
+}
+
+@keyframes aboutSpinner{
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes showRight {
+    100% {
+        width: 0;
     }
 }
