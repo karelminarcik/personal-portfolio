@@ -363,6 +363,7 @@ section {
         height: 100%;
         background-color: transparent;
         transition: 3s;
+        
 
         &:hover{
             background-color: $bg-color;
@@ -485,6 +486,13 @@ section {
             transition-delay: calc(.3s *var(--i));
             width: 0
         }
+
+        .educatio-box {
+            .animate.scroll {
+                transition-delay: calc(.3s *var(--i));
+                width: 0
+            }
+        }
     }
 
     @media (max-width:462px) {
@@ -518,6 +526,10 @@ section {
             .educatio-box {
                 position: relative;
                 border-left: .2rem solid $main-color;
+
+                // .animate.scroll {
+                //     width: 105%;
+                // }
                 
 
                 .education-content {
@@ -629,6 +641,7 @@ section {
             }
 
             .skills-box {
+                position: relative;
 
                 .skills-content {
                     position: relative;
@@ -686,7 +699,7 @@ section {
                         &:nth-child(1){
                             .bar {
                                 span{
-                                    width: 90%;
+                                    width: 80%;
                                 }
                             }
                             
@@ -694,7 +707,7 @@ section {
                         &:nth-child(2){
                             .bar {
                                 span{
-                                    width: 80%;
+                                    width: 65%;
                                 }
                             }
                             
@@ -702,7 +715,7 @@ section {
                         &:nth-child(3){
                             .bar {
                                 span{
-                                    width: 65%;
+                                    width: 50%;
                                 }
                             }
                             
@@ -710,7 +723,7 @@ section {
                         &:nth-child(4){
                             .bar {
                                 span{
-                                    width: 75%;
+                                    width: 60%;
                                 }
                             }
                             
@@ -724,7 +737,7 @@ section {
                         &:nth-child(1){
                             .bar {
                                 span{
-                                    width: 95%;
+                                    width: 50%;
                                 }
                             }
                             
@@ -864,8 +877,16 @@ section {
 
             .btn {
                 @include button;
-                cursor: pointer;
-                } 
+            }
+        }
+
+        .btn-box.btns {
+            display: inline-block;
+            width: 15rem;
+
+            &::before {
+                background-color: $sec-bg-color;
+            }
         }
 
     }
@@ -874,6 +895,7 @@ section {
 // ---------------- Footer ----------------
 
 footer {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -902,6 +924,7 @@ footer {
 
     .footer-text {
         position: relative;
+
         p {
             font-size: 1.6rem;
 
@@ -915,7 +938,7 @@ footer {
     .footer-iconTop {
 
         position: relative;
-
+        
         a {
             position: relative;
             display: inline-flex;

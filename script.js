@@ -49,3 +49,25 @@ window.onscroll = () => {
     footer.classList.toggle("show-animate", this.innerHeight + this.scrollY >= document.scrollingElement.scrollHeight)
 };
 
+// download cv.pdf 
+
+function downloadPDF() {
+    // Replace 'your_pdf_url_here.pdf' with the actual URL of the PDF file you want to download
+    var pdfUrl = 'cv-minarcik.pdf';
+
+    // Create an invisible anchor element
+    var link = document.createElement('a');
+    link.href = pdfUrl;
+
+    // Set the download attribute with the desired file name
+    link.download = 'minarcik_cv.pdf';
+
+    // Append the anchor element to the body
+    document.body.appendChild(link);
+
+    // Trigger a click event on the anchor element
+    link.click();
+
+    // Remove the anchor element from the body
+    document.body.removeChild(link);
+}
